@@ -1,0 +1,64 @@
+<div class="n"><app-navbar></app-navbar></div>
+
+<div class="" 
+style="display:flex;width:100%;
+ margin-top: auto;
+ margin-bottom: auto; 
+ margin-left: 0;
+ background-image: url(./../../../assets/images/mur8.jpg);
+ background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
+  
+ 
+  <div class="mt-5 mb-5" style="width: 40%; margin:auto;">
+  <div style="position:absolute; top: 9%; left: 6%;">
+    <div *ngIf="user?.filename===null" >
+      <img src="../../../assets/images/user.png"  class="card-img-top rounded-circle" 
+      style="width: 120px;height:120px;margin: auto;" alt="...">
+    </div>
+    <div *ngIf="user?.filename!==null">
+      <img src="{{'http://localhost:8081/api/ImgUser/'+user.user_id}}"  class="card-img-top rounded-circle" 
+      style="width: 120px;height:120px;margin: auto;" alt="...">
+    </div>
+  </div>
+      <input class="form-control form-control-lg recherche text-center"
+       style="border-radius: 10px;" 
+      type="search" 
+      placeholder="Recherche sur LaCasse.tn" 
+      aria-label="Search"
+       [(ngModel)]="term">
+      <!-- <i class="fa fa-search"></i> -->
+ </div> 
+</div>
+ 
+      <div class="all">
+      <div class="profile">
+        <div style="width:100%">
+    
+        </div>
+
+      
+
+        <div class="card mt-3" style="width:80%; position:sticky; top:85px;margin: auto;">
+         
+          <div class="card-body" style="margin:auto;">
+            <h5 class="card-title">{{user?.prenom}} {{user?.nom}}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{user?.naissance | date:'dd-MM-yyyy'}}</li>
+            <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"> {{user?.delegation.libelle}},{{user?.delegation.gouvernorat.libelle}}</i></li>
+            <li class="list-group-item"><i class="fa fa-phone"> {{user?.telephone}}</i></li>
+          </ul>
+        
+        </div>
+
+      </div>
+   
+    <div class="produits" style="border-radius: 25px;">
+      <span class="badge badge-pill badge-light" style="color:rgb(239, 74, 74)"> <h6>Annonces actives pour {{user?.prenom}} {{user?.nom}} ({{produits?.length}})</h6>  </span>
+      <app-produits-filtred [produits]="produits" [term]="term"></app-produits-filtred>
+      
+      </div>
+</div>
+<app-footer></app-footer>

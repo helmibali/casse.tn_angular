@@ -1,0 +1,180 @@
+<a class="nav-link"  id="myModalInscription"  data-toggle="modal" data-target="#inscription">
+  <i class="fa fa-user-plus"></i> &nbsp;Inscription </a>
+
+<!-- Modal -->
+<div class="modal fade" id="inscription" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Inscription</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<div class="container">
+   
+<form [formGroup]="this.userService.dataForm" (ngSubmit)="addData()">
+    <!-- <input type="hidden"  formControlName="id" id="id"> -->
+  
+    <div class="" style="display:flex;width: 90%;margin: auto;">
+      <div class="form-group" style="width:47%; margin:auto;">
+        <label>Prenom: </label>
+        <input type="text" class="form-control" formControlName="prenom" id="prenom">
+        <div *ngIf="prenom.touched && prenom.invalid">
+          <small *ngIf="prenom.errors.required" class="text-danger">Le champ nouveau prenom est obligatoire<br></small>
+          <small *ngIf="prenom.errors.minlength" class="text-danger">Au moins 6 caractéres</small>
+      </div>
+      </div>
+  
+      <div class="form-group" style="width:47%; margin:auto;">
+          <label>Nom: </label>
+          <input type="text" class="form-control" formControlName="nom" id="nom">
+          <div *ngIf="nom.touched && nom.invalid">
+            <small *ngIf="nom.errors.required" class="text-danger">Le champ nouveau nom est obligatoire<br></small>
+            <small *ngIf="nom.errors.minlength" class="text-danger">Au moins 6 caractéres</small>
+        </div>
+        </div>
+    </div>
+   
+    
+    <div class="" style="display:flex;width: 90%;margin: auto;">
+      <div class="form-group"style="width:47%; margin:auto;">
+        <label>Email: </label>
+        <input type="email" class="form-control"
+         formControlName="username" id="username"
+         [ngClass]="{'is-invalid':username.errors && username.touched}">
+         <div class="invalid-feedback"
+                     *ngIf="username.hasError('usernameTaken')">
+                    Username is taken
+                </div>
+                <div class="invalid-feedback"
+                     *ngIf="username.hasError('required')">
+                    Username is required
+                </div>
+                <div class="invalid-feedback"
+                     *ngIf="username.hasError('minlength')">
+                    Username must be at least 3 characters
+                </div>
+        <!-- <div *ngIf="username.touched && username.invalid">
+          <small *ngIf="username.get('username').hasError('usernameTaken')" class="text-danger">email existante déjà!</small>
+          <small *ngIf="username.errors.required" class="text-danger">Le champ téléphone nouveau mot de passe est obligatoire<br></small>
+          <small *ngIf="username.errors.minlength" class="text-danger">Au moins 6 caractéres</small>
+      </div> -->
+      </div>
+      <div class="form-group" style="width:47%; margin:auto;">
+        <label>téléphone: </label>
+        <input type="text" class="form-control" formControlName="telephone" id="telephone">
+        <div *ngIf="telephone.touched && telephone.invalid">
+          <small *ngIf="telephone.errors.required" class="text-danger">Le champ téléphone nouveau mot de passe est obligatoire<br></small>
+          <small *ngIf="telephone.errors.minlength" class="text-danger">Au moins 6 caractéres</small>
+      </div>
+      </div>
+    </div>
+      
+    
+      <div class="localisation mb-3"style="display:flex;width: 90%;margin: auto;">
+        <div class="form-group" style="width:47%; margin:auto;"> 
+          <label>Gouvernorat :</label> 
+            <select class="custom-select custom-select-sm" (change)="onSelectGov($event)">
+              <option value="0"></option>
+              <option *ngFor="let g of gouvernorats" [value]="g.id">{{g.libelle}}</option>
+            </select>
+      </div> 
+
+      <div class="form-group" style="width:47%; margin:auto;"> 
+        <label>Delegation :</label> 
+          <select class="custom-select custom-select-sm" formControlName="delegation_id">
+            <option value="0"></option>
+            <option *ngFor="let d of delegations" [value]="d.id">{{d.libelle}}</option>
+          </select>
+          <div *ngIf="delegation_id.touched && delegation_id.invalid">
+            <small *ngIf="delegation_id.errors.required" class="text-danger">Le champ Delegation  est obligatoire<br></small>
+            
+        </div>
+    </div> 
+  </div>
+  <div class="localisation mb-3"style="display:flex;width: 90%;margin: auto;align-items:flex-start;">
+      <div class="form-group" style="width:47%; margin:auto;">
+        <label>Mot de passe: </label>
+        <input type="password" class="form-control" formControlName="password" id="password">
+      </div>
+      
+      <div class="form-group" style="width:47%; margin:auto;align-self: stretch;">
+        <label>Confirmer mot de passe: </label>
+        <input type="password" class="form-control"  id="repassword" formControlName="repassword">
+        <div *ngIf="repassword.touched && repassword.invalid">
+          <small *ngIf="repassword.errors.required" class="text-danger">Le champ confirmation mot de passe est obligatoire<br></small>
+      </div>
+      <div *ngIf="repassword.valid && repassword.value != password.value" class="text-danger">
+          Les deux mots de passes ne sont identique merci de verifier
+      </div>
+      </div></div>
+     
+      <div class="form-group"  style="width:47%; margin:auto;;
+      position: relative;" hidden>
+     
+        <ng-multiselect-dropdown formControlName="roles"
+      [placeholder]="'roles'"
+      [settings]="dropdownSettings"
+      [data]="roles"
+      (onSelect)="onItemSelect($event)"
+      [(ngModel)]="selectedRoles"
+      
+      >
+      </ng-multiselect-dropdown>
+      
+    </div> 
+      <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <i class="fa fa-image">  Image</i>
+        </a>
+        
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+         
+          <div class="form-group">
+            <label>File Upload  </label>
+                <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                <img [src]="imgURL" height="200" *ngIf="imgURL">
+        </div>
+
+        <button
+         class="btn btn-primary"
+         type="button" 
+         data-toggle="collapse" 
+         data-target="#collapseExample"
+          aria-expanded="false"
+           aria-controls="collapseExample"
+         [disabled]="! onSelect" 
+         (click)="validateImg()"
+         >valider
+        </button>
+        <p>{{ok}}</p>
+        </div>
+      </div>
+
+
+      
+
+    <!-- <div class="form-group">
+        <label>File Upload  </label>
+            <input type="file" accept="image/*" (change)="onSelectFile($event)">
+            <img [src]="imgURL" height="200" *ngIf="imgURL">
+    </div> -->
+
+
+    <div class="form-group">
+     
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-warning" data-dismiss="modal">retour</button>
+      <button type="submit" [disabled]="this.userService.dataForm!.invalid" class="btn btn-outline-success"><i class="fa fa-database"></i> S'inscrire</button>
+    </div>
+
+  </form></div>
+
+</div>
+</div>
+</div>

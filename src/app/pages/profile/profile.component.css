@@ -1,0 +1,25 @@
+.n{
+    position: sticky;
+    top:0px;
+    width: 100%;
+    z-index: 9999;
+
+}
+.all{
+    display: flex;
+   
+}
+
+.profile{
+    width: 23%;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center;
+    align-items: flex-start; */
+ 
+
+}
+
+.produits{
+    width: 73%;
+}

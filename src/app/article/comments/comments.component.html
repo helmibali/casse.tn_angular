@@ -1,0 +1,25 @@
+<div class="comments mt-2">
+
+    <div class="comment-form-title"></div>
+    
+   
+
+    <div class="comment-container">
+        <div class="title"></div>
+        <comment
+          [a]="a"
+         *ngFor="let cmt of a.comments"
+         [cmt]="cmt"
+         [replies]="getReplies(cmt.id)"
+         [activeComment]="activeComment"
+         (setActiveComment)="setActiveComment($event)"
+         (addComment)="addComment($event)"
+         (deleteComment)="deleteComment($event)"
+          ></comment>
+    </div>
+
+    <comment-form 
+    submitLabel="commenter"
+    (handleSubmit)="addComment({text:$event,articleId: a.id,parentId: null })"
+     ></comment-form>
+</div>

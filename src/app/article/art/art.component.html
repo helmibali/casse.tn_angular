@@ -1,0 +1,109 @@
+<div class="n">
+  <app-navbar></app-navbar>
+</div>
+<div class="root" style="background-color:#e9ebedaf ;">
+
+  <div class="mt-5 create-article">
+    
+    <app-create-article></app-create-article>
+  </div>
+
+
+<div class="articles">
+  <!-- <app-create-article></app-create-article> -->
+  <!-- articles
+  <app-create-article></app-create-article>  -->
+
+  <!-- <div>
+    <nav aria-label="breadcrumb" class="mt-2">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page" >
+          <a routerLink="/"><i class="fa fa-home">  accueil</i></a>
+        </li>
+        <li></li>
+        <li>
+            <app-create-article></app-create-article>
+        </li>
+      </ol>
+    </nav>
+  </div> -->
+  <div class="container mt-4" style="margin:auto ;"  *ngFor="let a of articles">
+
+   
+
+
+   
+      <div class="card" style="margin:auto ; border-radius: 10px;" >
+        <div style="display:flex;margin-left:2%;margin-top:2%;">
+          <div *ngIf="a.user.filename !== null" >
+            <img class="card-img-top img-responsive rounded-circle"
+            src = "{{'http://localhost:8081/api/ImgUser/'+a.user.user_id}}" 
+            style = "height :70px;width:35px;"
+           alt="">
+          </div>
+          <div *ngIf="a.user.filename === null">
+            <img class="card-img-top img-responsive rounded-circle"
+            src = "../../../assets/images/user.png" 
+            style = "height :70px;width:35px;"
+           alt="">
+          </div>
+           
+    <div style="margin-left:2% ;margin-top:2%;">
+      <div style="font-weight : bold ;">{{a.user.prenom}} {{a.user.nom}}</div>
+      <div><p class="card-text" style="margin:auto ;"><small class="text-muted">{{a.dateCreation | date:'medium'}}</small></p> </div> 
+    </div>
+           
+        </div>
+        <div class="card-body" style="">
+          <h5 class="card-title" style="margin:auto ;">{{a.title}}</h5>
+          <p class="card-text" style="margin:auto ;">{{a.text}}  {{a.user.user_id}} </p>
+          <!-- <p class="card-text" style="margin:auto ;"><small class="text-muted">{{a.dateCreation | date:'medium'}}</small></p> -->
+        </div>
+        <div class="mb-2" *ngIf="a.filename !== null" style = "height :300px;width:100%;  margin:auto ; display: flex;">
+          <img class="card-img-top img-responsive"
+          src = "{{'http://localhost:8081/api/imga/'+a.id}}" 
+          style = "height :300px;width:90%; margin:auto ; "
+         alt="">
+        </div>
+        
+      </div>
+
+      <app-comments [a] = "a"></app-comments>
+   
+</div>
+
+</div>
+
+
+<div class="config mt-4">
+<div class="card" style="width: 80%;border-radius: 10px;display: flex;flex-direction: column;">
+ <div  class="mt-4" style="width:80%;margin:auto;">
+  <h5>Nouveaux produits</h5>
+ </div> 
+  <div *ngFor="let p of produits| paginate: {itemsPerPage: 9, currentPage: p }"
+   class="mb-2 mt-2"
+    style="width: 80%; margin: auto;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{'http://localhost:8081/api/imgp/'+p.idProduit}}" 
+         style = "height :100px;width:100px;border-radius: 10px;" 
+         class="card-img"
+          alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <p class="card-title ml-3">{{p.nomProduit}}</p>
+          <!-- <p class="card-text"><small class="text-muted">{{p.dateCreation | date:'HH:mm'}} à {{p.dateCreation | date:'dd-MM-yyyy'}}   </small></p> -->
+          <a class="ml-3" [routerLink]="['/produit',p.idProduit]"><small class="text-muted">Voir Plus</small> </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <pagination-controls (pageChange)="p =$event"></pagination-controls>
+</div>
+</div>
+
+<app-footer></app-footer>
