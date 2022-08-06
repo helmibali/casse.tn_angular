@@ -1,64 +1,97 @@
 <div class="n"><app-navbar></app-navbar></div>
-
-<div class="" 
-style="display:flex;width:100%;
- margin-top: auto;
- margin-bottom: auto; 
- margin-left: 0;
- background-image: url(./../../../assets/images/mur8.jpg);
- background-position: center;
-background-repeat: no-repeat;
-background-size: cover;">
-  
+<div style="background-color:#e9ebedaf ;">
  
-  <div class="mt-5 mb-5" style="width: 40%; margin:auto;">
-  <div style="position:absolute; top: 9%; left: 6%;">
-    <div *ngIf="user?.filename===null" >
-      <img src="../../../assets/images/user.png"  class="card-img-top rounded-circle" 
-      style="width: 120px;height:120px;margin: auto;" alt="...">
-    </div>
-    <div *ngIf="user?.filename!==null">
-      <img src="{{'http://localhost:8081/api/ImgUser/'+user.user_id}}"  class="card-img-top rounded-circle" 
-      style="width: 120px;height:120px;margin: auto;" alt="...">
-    </div>
-  </div>
-      <input class="form-control form-control-lg recherche text-center"
-       style="border-radius: 10px;" 
-      type="search" 
-      placeholder="Recherche sur LaCasse.tn" 
-      aria-label="Search"
-       [(ngModel)]="term">
-      <!-- <i class="fa fa-search"></i> -->
- </div> 
-</div>
- 
-      <div class="all">
-      <div class="profile">
-        <div style="width:100%">
-    
-        </div>
+   
+        <div class="all">
+        <div class="profile">
+          <div style="width:100% ;position:sticky; top:80px;">
+            <div class="card mt-3 mb-3" style="width:70%;margin: auto;border-radius: 10px;">
+           
+              <div class="card-body" style="margin:auto;">
+                <div>
+                  <div *ngIf="user?.filename===null" style="display:flex ;align-items:center;" >
+                    <img src="../../../assets/images/user.png"  class="rounded-circle" 
+                    style="width: 90px;height:80px;margin:auto;" alt="...">
+                  </div>
+                  <div *ngIf="user?.filename!==null" style="display:flex ;align-items:center;">
+                    <img src="{{'http://localhost:8081/api/ImgUser/'+user.user_id}}"  class="rounded-circle" 
+                    style="width: 70px;height:80px;margin:auto;" alt="...">
+                  </div>
+                </div>
+                <h5 class="card-title" style="margin:auto ;" >{{user?.prenom}} {{user?.nom}}</h5>
+              </div>
+              <ul class="list-group list-group-flush mb-3">
+             
+                
+                <li class="list-group-item"*ngIf="user?.username !== this.authService.loggedUser "><i class="fa fa-phone"> {{user?.telephone}}</i></li>
+                <li class="list-group-item"*ngIf="user?.username !== this.authService.loggedUser "><i class="fa fa-envelope" aria-hidden="true"> {{user?.username}}</i></li>
+                <li class="list-group-item"*ngIf="user?.username !== this.authService.loggedUser "><i class="fa fa-map-marker" aria-hidden="true"> {{user?.delegation.libelle}},{{user?.delegation.gouvernorat.libelle}}</i></li>
+                <li class="list-group-item"*ngIf="user?.username === this.authService.loggedUser ">
+                  <cartinCmd [cartsCmd]="cartsCmd"></cartinCmd>
+                </li>
+                <li class="list-group-item"*ngIf="user?.username === this.authService.loggedUser ">
+                  <app-liste-cart [carts]="carts"  ></app-liste-cart></li>
+                <li class="list-group-item"*ngIf="user?.username === this.authService.loggedUser ">Vos questions</li>
+                <li class="list-group-item"*ngIf="user?.username === this.authService.loggedUser ">Historique de votre activités</li>
+                <li class="list-group-item"*ngIf="user?.username === this.authService.loggedUser ">Modifier vos cordonneés </li>
+                <li class="list-group-item"*ngIf="user?.username === this.authService.loggedUser ">Changer mot de passe </li>
+              </ul>
+            
+            </div>
 
-      
-
-        <div class="card mt-3" style="width:80%; position:sticky; top:85px;margin: auto;">
-         
-          <div class="card-body" style="margin:auto;">
-            <h5 class="card-title">{{user?.prenom}} {{user?.nom}}</h5>
+            <!-- <div *ngIf="user?.username === this.authService.loggedUser " class="card mt-3 mb-3" style="width:70%; margin: auto;border-radius: 10px;">
+           
+              <div class="card-body" style="margin:auto;">
+               
+                <h5 class="card-title" style="margin:auto ;">activités</h5>
+              </div>
+              <ul class="list-group list-group-flush mb-3">
+             
+                
+                <li class="list-group-item">Les produits commandés </li>
+                <li class="list-group-item">Vos commades</li>
+                <li class="list-group-item">Vos questions</li>
+                <li class="list-group-item">Historique de votre activités</li>
+                <li class="list-group-item">Modifier vos cordonneés </li>
+              </ul>
+            
+            </div> -->
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{user?.naissance | date:'dd-MM-yyyy'}}</li>
-            <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"> {{user?.delegation.libelle}},{{user?.delegation.gouvernorat.libelle}}</i></li>
-            <li class="list-group-item"><i class="fa fa-phone"> {{user?.telephone}}</i></li>
-          </ul>
+  
+        
+  
+          
+
+        
+  
+        </div>
+     
+      <div class="produits">
+<div class="mt-4 mb-3" style="width: 60%;">
+  <input class="form-control form-control-lg recherche text-center"
+  style="border-radius: 10px;" 
+ type="search" 
+ placeholder="Recherche sur LaCasse.tn" 
+ aria-label="Search"
+  [(ngModel)]="term">
+</div>
+       
+        <span  class="badge badge-pill badge-light" style="color:rgb(239, 74, 74)">
+          
+           <h6 >Annonces actives pour {{user?.prenom}} {{user?.nom}} ({{produits?.length}})</h6> 
+           </span>
+        <app-produits-filtred
+         [produits]="produits"
+          [term]="term"
+          ></app-produits-filtred>
         
         </div>
 
-      </div>
-   
-    <div class="produits" style="border-radius: 25px;">
-      <span class="badge badge-pill badge-light" style="color:rgb(239, 74, 74)"> <h6>Annonces actives pour {{user?.prenom}} {{user?.nom}} ({{produits?.length}})</h6>  </span>
-      <app-produits-filtred [produits]="produits" [term]="term"></app-produits-filtred>
-      
-      </div>
+
+        <div class="questions">
+
+        </div>
+  </div>
 </div>
+
 <app-footer></app-footer>

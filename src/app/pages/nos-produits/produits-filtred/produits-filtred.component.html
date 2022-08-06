@@ -104,7 +104,7 @@
           <button class="btn btn-light dropdown-toggle" *ngIf="authService.loggedUser == produit.user.username" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu" style="border-radius:10px;background-color:#e9ebeddf" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" (click)="supprimerProduit(produit)">Supprimer</a>
             <a class="dropdown-item" href="#">Modifier</a>
             <a class="dropdown-item" href="#">Désactiver</a>

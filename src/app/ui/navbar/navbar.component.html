@@ -27,7 +27,7 @@
         >
           
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <div class="dropdown-menu" style="border-radius:10px;background-color:#e9ebeddf" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item" type="button">
             <a 
             class="user_options" 
@@ -136,7 +136,7 @@
           >
             {{ user?.prenom }} {{ user?.nom }}
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <div class="dropdown-menu"  style="border-radius:10px;background-color:#e9ebeddf" aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button">
               <a
                 *ngIf="authService.isAdmin()"
@@ -187,13 +187,12 @@
   top:10px"
 >
 <i 
-class="fa fa-tasks" 
+class="fa fa-list-alt" 
 aria-hidden="true"
  style="font-size:25px;color: crimson;"></i>
 </a>
-<span class="badge" style="position: absolute;">{{carts.length}}</span>
+<span class="badge" style="position: absolute;">{{carts?.length}}</span>
 </div>
-
 
         
       </ul>

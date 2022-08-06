@@ -71,6 +71,7 @@ import { ReglesDeDiffusionComponent } from './pages/regles-de-diffusion/regles-d
 import { AddCartComponent } from './cart/add-cart/add-cart.component';
 import { ListeCartComponent } from './cart/liste-cart/liste-cart.component';
 import { CartCompleteComponent } from './cart/cart-complete/cart-complete.component';
+import { ListeCartCmdComponent } from './cart/liste-cart-cmd/liste-cart-cmd.component';
 
 
 
@@ -140,6 +141,7 @@ import { CartCompleteComponent } from './cart/cart-complete/cart-complete.compon
     AddCartComponent,
     ListeCartComponent,
     CartCompleteComponent,
+    ListeCartCmdComponent,
    
    
     

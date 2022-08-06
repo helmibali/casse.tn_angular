@@ -46,7 +46,7 @@ this.cartService.getAll().subscribe(data=>{
 initData(){
   this.isLoading=true;
   this.produitService.consulterProduit(this.activatedRoute.snapshot.params.id).toPromise().then(p=>{
-    //console.log(p);
+
     this.produit=p;
 
     this.cartService.dataForm = this.formBuilder.group({
@@ -73,10 +73,7 @@ addToCart(){
       this.carts = [...this.carts, data];
     
      window.location.reload();
-
-   
-    }
-   
+     }
     ) 
     .catch(()=>this.errTXT="msg d'erreur").finally(()=>{
       

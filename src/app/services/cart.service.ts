@@ -13,7 +13,8 @@ const httpOPtions = {
 })
 export class CartService {
   public dataForm: FormGroup;
-  constructor(private http: HttpClient,  private authService : AuthService) { }
+  constructor(private http: HttpClient, 
+     private authService : AuthService) { }
   createCart(formData: FormData):Observable<Cart>{
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
@@ -34,6 +35,16 @@ export class CartService {
             const url = `${'http://localhost:8081/api/prix-cart'}/${username}`;
             return this.http.get(url);
               }
+
+              getByUsernameEnCours(username:string):Observable<any>{
+                const url = `${'http://localhost:8081/api/liste-cart-en-cours'}/${username}`;
+                return this.http.get(url);
+                  }
+
+        getByUsernameEnCommade(username:string):Observable<any>{
+          const url = `${'http://localhost:8081/api/liste-cart-en-commande'}/${username}`;
+          return this.http.get(url);
+            }
 
               
 supprimerCart(id: number){
