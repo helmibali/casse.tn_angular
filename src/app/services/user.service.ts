@@ -34,6 +34,10 @@ export class UserService {
   getUserByUsername(username: string):Observable<User> {
     return this.http.get<User>(`${'http://localhost:8081/api/info'}/${username}`);
   }
+
+  getUserByDiscussion(username: string):Observable<any> {
+    return this.http.get<any>(`${'http://localhost:8081/api/user-contact'}/${username}`);
+  }
   createData(formData: FormData): Observable<any> {
     return this.http.post('http://localhost:8081/api/signup', formData);
   }
@@ -68,6 +72,7 @@ updateImagePw(formData:FormData , user_id):Observable<any> {
   let httpHeaders = new HttpHeaders({"Authorization":jwt})
   return this.http.put(`${'http://localhost:8081/api/userPw'}/${user_id}`, formData,{headers:httpHeaders})
 }
+
 
 supprimerUtilisateur(id: number){
   let jwt = this.authService.getToken();

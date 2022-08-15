@@ -11,14 +11,15 @@
         ><img
           src="../../../assets/images/logo1.png"
           alt=""
-          style="width: 250px; height: 210px; position: absolute; top: -140%"
+          style="width: 275px;
+          height: 260px; position: absolute; top: -140%"
       /></a>
       <!-- Links -->
       <!-- dropdown -->
       <div  class="dropdown">
         <button
           class="btn btn-light dropdown-toggle ml-1"
-          style="font-weight: bold"
+          style="font-weight: bold;display: flex;justify-content: center;align-items: center;"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -54,28 +55,10 @@
 
 
       <ul class="navbar-nav ml-5" style="position: relative; left: 10%">
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/">Acceill</a>
-        </li> -->
-
-        <!-- <li class="nav-item">
-    <a class="nav-link"  routerLink="/">Nos Partenaires</a>
-   </li> -->
-
-        <!-- <li class="nav-item">
-    <a class="nav-link"  routerLink="/actualites">Actualités</a>
-   </li> -->
-
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/actualite">Actualités</a>
-        </li> -->
-
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/contact">Contact</a>
-        </li> -->
+ 
       </ul>
       <ul class="navbar-nav ml-auto">
-        <!-- <li><a class="nav-link">{{ authService.loggedUser}}</a></li> -->
+        
         <li>
           <a
            class="nav-link"
@@ -102,8 +85,7 @@
             <i class="fa fa-sign-in"></i> &nbsp;Connexion</a
           >
         </li>
-        <!-- <li><a *ngIf="authService.isloggedIn" (click)="logout()" class="nav-link" routerLink="/login">
-        <i class="fa fa-user"></i> &nbsp;deconnexion</a></li> -->
+        
         <div *ngIf="!authService.isloggedIn">
           <button
             class="btn btn-outline-warning"
@@ -123,20 +105,109 @@
                 Publier votre annonce!
             </button> -->
         </div>
+        <div *ngIf="authService.isloggedIn">
+          <button 
+          
+          type="button"
+           class="btn btn-outline-danger dropdown-toggle"
+           style="border:none;"
+            data-toggle="dropdown"
+            id="dropdownMenuButton2"
+             aria-haspopup="true"
+              aria-expanded="false">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-menu" style="width:20%;border-radius:10px;left:71%;top:78%;background-color:#f9f9f9df;" >
+           <div *ngFor="let m of lastMsg2 " style="display:flex;align-items: center;align-items: center;" >
+            <div style="list-style-type: none;padding:0;margin:0; width:100%;left:0%" class="mb-1 ml-1">
+              <div style="display:flex;">
+                <div>
+                  <div *ngIf="m.auteur.filename === null">
+                    <a (click)="toDiscussion(m.auteur.username)">
+                    <img class="card-img-top img-responsive rounded-circle image-user"
+                    src =  "../../../assets/images/user.png" 
+                    style = "height :50px;width:50px"
+                   alt="">
+                    </a>
+                  </div>
+                  <div  *ngIf="m.auteur.filename !== null">
+                    <a  (click)="toDiscussion(m.auteur.username)">
+                    <img class="card-img-top img-responsive rounded-circle image-user"
+                    src = "{{'http://localhost:8081/api/ImgUser/'+m.auteur.user_id}}" 
+                    style = "height :50px;width:50px"
+                   alt="">
+                  </a>
+                  </div>
+                 
+                </div>
+                <div class="ml-2" *ngIf="this.authService.loggedUser!==m.auteur.username" >
+                 <b>{{m.auteur.prenom}} {{m.auteur.nom}}</b> <br/>
+                 <p>{{m.message}}</p>
+                </div>
+                
+               </div>
+              </div>
+            </div>
+         <a routerLink="/discussions">voir tout</a> 
+            
+            
+
+        </div>
+       </div> 
+<div>
+  <button type="button"
+  class="btn btn-outline-danger dropdown-toggle"
+  style="border:none;"
+   data-toggle="dropdown"
+    *ngIf="authService.isloggedIn" 
+     style="border: none;"
+     routerLink="/cart">
+   
+  <i 
+  class="fa fa-list-alt" 
+  aria-hidden="true"
+   style="font-size:25px"></i>
+  
+  <span class="badge" style="position: absolute;    top: 5px;
+  right: 15%;">{{carts?.length}}</span>
+   </button>
+</div>
+       
 
         <div *ngIf="authService.isloggedIn" class="dropdown">
           <button
             class="btn btn-light dropdown-toggle ml-5"
-            style="font-weight: bold"
+            style="font-weight: bold;display:flex; align-items: center;justify-content: center;"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
-            {{ user?.prenom }} {{ user?.nom }}
+          <div style="display:flex ;">
+            <div *ngIf="user?.filename === null">
+              <img class="img-responsive rounded-circle"
+              src =  "../../../assets/images/user.png" 
+              style = "height :40px;width:40px"
+             alt="">
+            </div>
+            <div  *ngIf="user?.filename !== null">
+              <img class="img-responsive rounded-circle"
+              src = "{{'http://localhost:8081/api/ImgUser/'+user.user_id}}" 
+              style = "height :40px;width:40px"
+             alt="">
+            </div>
+          </div>
+          
+            <!-- {{ user?.prenom }} {{ user?.nom }} -->
           </button>
-          <div class="dropdown-menu"  style="border-radius:10px;background-color:#e9ebeddf" aria-labelledby="dropdownMenu2">
+          <div class="dropdown-menu"
+            style="
+            border-radius:10px;
+            background-color:#e9ebeddf ; 
+            left: -32%;
+           " 
+            aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button">
               <a
                 *ngIf="authService.isAdmin()"
@@ -152,7 +223,7 @@
                 class="user_options"
                 (click)="viewProfile()"
               >
-                <i class="fa fa-user"></i> &nbsp;Mon profile</a
+                <i class="fa fa-user"></i> &nbsp;Mon compte</a
               >
             </button>
             <button class="dropdown-item" type="button">
@@ -177,22 +248,8 @@
             </button>
           </div>
         </div>
-<div *ngIf="authService.isloggedIn">
-  <a
-  class=""
-  type="button"
-  routerLink="/cart"
-  style=
-  "border: none;
-  top:10px"
->
-<i 
-class="fa fa-list-alt" 
-aria-hidden="true"
- style="font-size:25px;color: crimson;"></i>
-</a>
-<span class="badge" style="position: absolute;">{{carts?.length}}</span>
-</div>
+         
+
 
         
       </ul>

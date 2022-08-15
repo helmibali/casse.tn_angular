@@ -32,7 +32,11 @@ public dataForm: FormGroup;
       return this.http.post<any>
       ('http://localhost:8081/api/comment1',formData ,{headers:httpHeaders});
     }
-
+getCommentsByArticle(id:number):Observable<any>{
+  
+ 
+  return this.http.get<any>(`${'http://localhost:8081/api/comments/article'}/${id}`);
+}
     
   getComments():Observable<any>{
   
@@ -43,7 +47,7 @@ public dataForm: FormGroup;
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
       return this.http.post<Cmt>('http://localhost:8081/api/comment',{
-        text: text,
+        texte: text,
         user: this.authservice.loggedUser,
         article:articleId,
         parentId,

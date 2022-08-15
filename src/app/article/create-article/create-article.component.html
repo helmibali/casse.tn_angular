@@ -1,6 +1,11 @@
 <div *ngIf="authService.isloggedIn">
-<button type="button" class="btn btn-outline-primary mt-3" style="border:none;font-weight:bold;" data-toggle="modal" id="myModalArt" data-target="#article">
-    Posez un question
+<button type="button" 
+class="btn btn-outline-danger"
+ style="border:none;font-weight:bold; color:black;"
+  data-toggle="modal" 
+  id="myModalArt"
+   data-target="#article">
+    publier un post
   </button>
 </div>
 <div *ngIf="!authService.isloggedIn">
@@ -10,7 +15,21 @@
     </div>
   
   <!-- Modal -->
-  <div class="modal fade" id="article" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div 
+  class="modal fade"
+   style="position:absolute;
+   height: 500px;
+    top: -290%;
+   width: 200%;
+   height: 500px;
+   left: 121%;" 
+   id="article" 
+   data-backdrop="static" 
+   data-keyboard="false" 
+   tabindex="-1" 
+   aria-labelledby="staticBackdropLabel" 
+   aria-hidden="true"
+   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

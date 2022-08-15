@@ -57,25 +57,24 @@ export class CommentComponent implements OnInit {
   
   ngOnInit(): void {
    
-    const fiveMinutes = 300000;
-    let date = new Date();
-    let dateComment = new Date(this.cmt.dateComment)
-    const timePassed:boolean = date.getTime() - dateComment.getTime() > fiveMinutes;
+    // const fiveMinutes = 300000;
+    // let date = new Date();
+    // let dateComment = new Date(this.cmt.dateComment)
+    // const timePassed:boolean = date.getTime() - dateComment.getTime() > fiveMinutes;
 
         this.canReply = Boolean(this.currentUsername);
-        this.canEdit = this.currentUsername === this.cmt.user.username && !timePassed;
-        this.canDelete = this.currentUsername === this.cmt.user.username && 
-        this.replies.length===0; 
-         this.replyId = this.parentId ? this.parentId : this.cmt.id;
+        // this.canEdit = this.currentUsername === this.cmt.user.username && !timePassed;
+        this.canDelete = this.currentUsername === this.cmt.user.username
+        //  this.replyId = this.parentId ? this.parentId : this.cmt.id;
        
   }
-  isReplying(): boolean {
-    if (!this.activeComment) {
-      return false;
-     }
-    return (
-      this.activeComment.id === this.cmt.id &&
-      this.activeComment.type === this.activeCommentType.replying
-    );
-  }    
+  // isReplying(): boolean {
+  //   if (!this.activeComment) {
+  //     return false;
+  //    }
+  //   return (
+  //     this.activeComment.id === this.cmt.id &&
+  //     this.activeComment.type === this.activeCommentType.replying
+  //   );
+  // }    
 }

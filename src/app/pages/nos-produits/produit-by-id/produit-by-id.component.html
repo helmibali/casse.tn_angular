@@ -42,6 +42,12 @@
                             <div class="cart mt-4 align-items-center">
 
                                 <button class="btn btn-danger text-uppercase mr-2 px-4" hidden>Commander</button> 
+                                <div class="text-center mt-1" *ngIf="isLoading != false">
+                                  <div class="card shadow mb-4">
+                                        <span class="visually-hidden">Loading...</span>
+                                      </div>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>

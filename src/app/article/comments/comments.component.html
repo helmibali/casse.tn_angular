@@ -8,11 +8,8 @@
         <div class="title"></div>
         <comment
           [a]="a"
-         *ngFor="let cmt of a.comments"
+         *ngFor="let cmt of comments"
          [cmt]="cmt"
-         [replies]="getReplies(cmt.id)"
-         [activeComment]="activeComment"
-         (setActiveComment)="setActiveComment($event)"
          (addComment)="addComment($event)"
          (deleteComment)="deleteComment($event)"
           ></comment>

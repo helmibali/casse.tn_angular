@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth.service';
 import { Categorie } from 'src/app/model/categorie.model';
 import { Delegation } from 'src/app/model/delegation.model';
@@ -64,7 +65,7 @@ export class AjouterProduitFrontComponent implements OnInit {
               private gouvernoratService : GouvernoratService,
               private delegationService : DelegationService,
               private familleService : FamilleService,
-             
+              private toastr: ToastrService,
               private catService : CatService,
   ) { }
 
@@ -140,11 +141,14 @@ export class AjouterProduitFrontComponent implements OnInit {
     formData.append('produit',JSON.stringify(produit));
     formData.append('file',this.userFile);
     this.produitService.createData(formData).toPromise().then(data=>{
-      console.log(data);  
+      console.log(data); 
       this.router.navigate(['/']).then(()=> {
+       
         window.location.reload();
+        
       },
       );
+       this.toastr.success('Annonce publié avec succé!'); 
     }
    
     ) 

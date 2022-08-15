@@ -12,6 +12,7 @@ import { CommentsComponent } from './article/comments/comments.component';
 import { CartCompleteComponent } from './cart/cart-complete/cart-complete.component';
 import { ConditionUtilisationComponent } from './condition-utilisation/condition-utilisation.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+
 import { ActualitesComponent } from './pages/actualites/actualites.component';
 import { AddProduitComponent } from './pages/add-produit/add-produit.component';
 import { AddArticleComponent } from './pages/article/add-article/add-article.component';
@@ -21,6 +22,8 @@ import { AddCategorieComponent } from './pages/categorie/add-categorie/add-categ
 import { ListeCategorieComponent } from './pages/categorie/liste-categorie/liste-categorie.component';
 import { UpdateCategorieComponent } from './pages/categorie/update-categorie/update-categorie.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { DiscussionComponent } from './pages/discussion/discussion.component';
+import { DiscussionsComponent } from './pages/discussions/discussions.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { ListContactComponent } from './pages/list-contact/list-contact.component';
@@ -46,6 +49,7 @@ import { UtilisateursComponent } from './pages/utilisateurs/utilisateurs.compone
 import { ProduitGuard } from './produit.guard';
 import { TestComponent } from './test/test.component';
 import { UpdateProduitComponent } from './update-produit/update-produit.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 
 const routes: Routes = [
@@ -63,7 +67,7 @@ const routes: Routes = [
   {path: 'categories', component: ListeCategorieComponent},
   {path: 'marques', component: ListMarqueComponent},
   {path: 'ajouter-marque', component: AddMarqueComponent},
-  {path:"updateProduit/:id", component: UpdateProduitComponent,canActivate:[ProduitGuard]},
+  
   {path:"updateMarque/:id", component:UpdateMarqueComponent },
   {path:"nos-produits", component:NosProduitsComponent },
   {path:"updateCategorie/:id", component:UpdateCategorieComponent },
@@ -92,6 +96,10 @@ const routes: Routes = [
   {path:"Regles-De-Diffusion",component:ReglesDeDiffusionComponent},
   {path:"nos-produits",component:NosProduitsComponent},
   {path:"cart",component:CartCompleteComponent},
+  {path:"updateProduit/:id", component: UpdateProduitComponent,canActivate:[ProduitGuard]},
+  {path:"discussion/:emiter/:auteur" ,component:DiscussionComponent},
+  {path:"discussions" ,component:DiscussionsComponent},
+  {path:"mon-compte/:user_id" ,component:UserPanelComponent},
   {path: "add-familles",component:AddFamilleComponent}
   
 

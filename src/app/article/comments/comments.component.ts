@@ -28,9 +28,9 @@ export class CommentsComponent implements OnInit {
     public authService : AuthService) { }
 
   ngOnInit(): void {
-  this.commentService.listeComments().subscribe(c => {
-    this.comments=c;
-  })
+   this.commentService.getCommentsByArticle(this.a.id).subscribe(c => {
+     this.comments=c;
+   })
 }
 
  
@@ -46,24 +46,27 @@ export class CommentsComponent implements OnInit {
   }):void
   {
 this.commentService.createComment(text,parentId,articleId).subscribe(c=>{
-  this.a.comments = [...this.a.comments, c];
+  this.comments = [...this.comments, c];
   this.activeComment = null;
 })
 }
 
 
-getReplies(commentId: number): Cmt[] {
-  return this.a.comments
-   .filter((comment) => comment.parentId == commentId)
-    .sort(
-      (a, b) =>
-        new Date(a.dateComment).getTime() - new Date(b.dateComment).getTime()
-   );
-}
 
-setActiveComment(activeComment: ActiveCommentInterface | null): void {
-  this.activeComment = activeComment;
-}
+
+
+// getReplies(commentId: number): Cmt[] {
+//   return this.a.comments
+//    .filter((comment) => comment.parentId == commentId)
+//     .sort(
+//       (a, b) =>
+//         new Date(a.dateComment).getTime() - new Date(b.dateComment).getTime()
+//    );
+// }
+
+// setActiveComment(activeComment: ActiveCommentInterface | null): void {
+//   this.activeComment = activeComment;
+// }
 
 deleteComment(commentId: number): void {
   this.commentService.deleteComment(commentId).subscribe(() => {
@@ -73,7 +76,7 @@ deleteComment(commentId: number): void {
     
   });
   this.router.navigate(['actualite']).then(()=> {
-    window.location.reload();
+    // window.location.reload();
   });
 }
 

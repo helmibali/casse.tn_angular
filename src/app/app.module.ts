@@ -72,6 +72,16 @@ import { AddCartComponent } from './cart/add-cart/add-cart.component';
 import { ListeCartComponent } from './cart/liste-cart/liste-cart.component';
 import { CartCompleteComponent } from './cart/cart-complete/cart-complete.component';
 import { ListeCartCmdComponent } from './cart/liste-cart-cmd/liste-cart-cmd.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DiscussionComponent } from './pages/discussion/discussion.component';
+
+import { DiscussionsComponent } from './pages/discussions/discussions.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
+import { WriteMessageComponent } from './pages/write-message/write-message.component';
+import { MessagesAllComponent } from './pages/messages/messages-all/messages-all.component';
+
+
 
 
 
@@ -142,6 +152,12 @@ import { ListeCartCmdComponent } from './cart/liste-cart-cmd/liste-cart-cmd.comp
     ListeCartComponent,
     CartCompleteComponent,
     ListeCartCmdComponent,
+    DiscussionComponent,
+    DiscussionsComponent,
+    UserPanelComponent,
+    WriteMessageComponent,
+    MessagesAllComponent,
+    
    
    
     
@@ -159,7 +175,9 @@ import { ListeCartCmdComponent } from './cart/liste-cart-cmd/liste-cart-cmd.comp
     Ng2SearchPipeModule,
     NgxPaginationModule,
     CommonModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     
   ],
   // {provide:HTTP_INTERCEPTORS, useClass : TokenInterceptor,multi:true}

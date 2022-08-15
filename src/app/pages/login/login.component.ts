@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/auth.service';
 import { Role } from 'src/app/model/role.model';
 import { User } from 'src/app/model/user.model';
@@ -21,6 +22,7 @@ roles:Role[];
 
   constructor(private authService:AuthService,
               private router:Router,
+              private toastr: ToastrService,
               private userService:UserService
               ) {}
   ngOnInit(): void {
@@ -39,9 +41,11 @@ roles:Role[];
   this.authService.saveToken(jwToken);
   this.authService.getUserFromDB(this.user.username).subscribe(user=>{
     this.authService.signIn(user);
+    this.toastr.success('Bienvenue!');
   })
   this.router.navigate(['/']);
   },(erreur)=>{ this.err = 1;
+    this.toastr.error('Merci de verifier');
   });
 
 

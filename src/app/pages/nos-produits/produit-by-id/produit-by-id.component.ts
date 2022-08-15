@@ -8,6 +8,7 @@ import { User } from 'src/app/model/user.model';
 import { ProduitService } from 'src/app/produit.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-produit-by-id',
   templateUrl: './produit-by-id.component.html',
@@ -18,6 +19,7 @@ export class ProduitByIdComponent implements OnInit {
   isLoading:boolean = false;
   errTXT:string='';
   carts:Cart[];
+  
   constructor(
     private _location: Location,
     public produitService:ProduitService,
@@ -25,6 +27,7 @@ export class ProduitByIdComponent implements OnInit {
     private authService:AuthService,
     public cartService:CartService,
     private router:Router,
+    private toastr: ToastrService,
     private formBuilder : FormBuilder) { }
     initForm(){
      
@@ -71,7 +74,8 @@ addToCart(){
     this.cartService.createCart(formData).toPromise().then(data=>{
       console.log(data);  
       this.carts = [...this.carts, data];
-    
+      this.toastr.success('Pièce commandé avec succé!');
+      this.isLoading=true;
      window.location.reload();
      }
     ) 

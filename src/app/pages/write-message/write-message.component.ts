@@ -13,26 +13,26 @@ import { MessageService } from 'src/app/services/message.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-write-message',
+  templateUrl: './write-message.component.html',
+  styleUrls: ['./write-message.component.css']
 })
-export class ProfileComponent implements OnInit {
-term;
-isLoading:boolean = false;
-errTXT:string='';
-user:User;
-produits:Produit[];
-pic: Boolean;
-idCarts:string="idCarts";
-idCartsCmd:string="idCartsCmd";
-carts:Cart[];
-cartsCmd:Cart[];
-username:string;
-messages:Message[];
-form!:FormGroup;
-initialText: string = '';
-lastMsg:Message[];
+export class WriteMessageComponent implements OnInit {
+  term;
+  isLoading:boolean = false;
+  errTXT:string='';
+  user:User;
+  produits:Produit[];
+  pic: Boolean;
+  idCarts:string="idCarts";
+  idCartsCmd:string="idCartsCmd";
+  carts:Cart[];
+  cartsCmd:Cart[];
+  username:string;
+  messages:Message[];
+  form!:FormGroup;
+  initialText: string = '';
+  lastMsg:Message[];
   constructor(
     public userService: UserService,
     public authService: AuthService,
@@ -49,8 +49,7 @@ lastMsg:Message[];
     subscribe( u =>{
       this.user=u;
       this.username=u.username;  
-      this.CartCmd(this.username);
-      this.CartenCours(this.username);  
+      
 this.initData();
       
       this.messageService.getByEmiteur(this.username).subscribe(m=>{
@@ -58,25 +57,18 @@ this.messages = m;
 
       })
   });
-  this.produitService.listeProduitsByUser(this.activatedRoute.snapshot.params.user_id).subscribe(p=>{
-    this.produits=p;
-  })
+
   }
-CartenCours(username:string){
-  this.cartService.getByUsernameEnCours(username).subscribe(data=>{
-    this.carts=data;
-    console.log(this.carts);
+  initData(){
+  
+    this.messageService.dataForm = this.formBuilder.group({
+      auteur:new FormControl(this.authService.loggedUser), 
+      emiter:new FormControl(this.user.user_id),
+      message:new FormControl(""),
+      dateCreation:new FormControl(new Date()),
         });
 
 }
-CartCmd(username:string){
- this.cartService.getByUsernameEnCommade(username).subscribe(d=>{
-    this.cartsCmd=d;
-    console.log(this.cartsCmd);
-     });      
-    
-}
-
 onSubmit(){
   const formData = new FormData();
   const message = this.messageService.dataForm.value;
@@ -92,16 +84,4 @@ onSubmit(){
     
   });
 }
-
-initData(){
-  
-    this.messageService.dataForm = this.formBuilder.group({
-      auteur:new FormControl(this.authService.loggedUser), 
-      emiter:new FormControl(this.user.user_id),
-      message:new FormControl(""),
-      dateCreation:new FormControl(new Date()),
-        });
-
-}
-
 }

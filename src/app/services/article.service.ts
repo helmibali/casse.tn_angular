@@ -50,6 +50,10 @@ export class ArticleService {
   
     return this.http.get<Article[]>('http://localhost:8081/api/articles');
   }
+  listeArticlesByUser(username:string):Observable<Article[]>{
+  
+    return this.http.get<Article[]>(`${'http://localhost:8081/api/article-par-utlisateur'}/${username}`);
+  }
   supprimerArticle(id: number){
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;

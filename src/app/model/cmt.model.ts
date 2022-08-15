@@ -3,7 +3,7 @@ import { User } from "./user.model";
 
 export class Cmt{
     id :number;
-    text:string;
+    texte:string;
     user: User;
     article:Article;
     dateComment:Date;

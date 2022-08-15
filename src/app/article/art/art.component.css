@@ -6,7 +6,9 @@
 .create-article{
     width: 25%;
     display: flex; 
-    justify-content:center
+    /* justify-content:center */
+    flex-direction: column;
+    z-index: 9990;
 }
 
 .articles{ 
