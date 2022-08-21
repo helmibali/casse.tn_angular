@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { $$ } from 'protractor';
 import { AuthService } from 'src/app/auth.service';
@@ -24,6 +25,7 @@ produits:Produit[];
   title= "Mes Produits";
   user:User;
   darkModeEnabled:boolean = false;
+  msgBtn:boolean = false;
   addButton:string = "Publier une Annonce";
   carts:Cart[];
   messages:Message[];
@@ -31,11 +33,16 @@ produits:Produit[];
   lastMsg2:Message[];
   lastMsg3:Message[];
   lastMsg4:Message[];
+  messagesReceved:Message[];
+  messagesRecevedUnread:Message[];
+  badgeMsg:number;
   allD:any[];
   contacts:User[];
+  count:number;
   
   
   constructor(
+    private formBuilder : FormBuilder,
     public authService:AuthService,
      private router:Router,
      public userService: UserService,
@@ -44,6 +51,15 @@ produits:Produit[];
      private messageService: MessageService) { }
 
   ngOnInit(): void {
+    
+    this.messageService.getByEmiteur(this.authService.loggedUser).subscribe(m=>{
+      this.messagesReceved=m.reverse();
+    })
+
+    this.messageService.getByEmiteurUnread(this.authService.loggedUser).subscribe(m=>{
+      this.messagesRecevedUnread=m.reverse();
+    })
+
     this.cartService.getByUsername(this.authService.loggedUser).subscribe(data=>{
       this.carts=data;
           });
@@ -62,7 +78,7 @@ produits:Produit[];
   })
   this.messageService.getByUser(this.authService.loggedUser).subscribe(u=>{
     this.messages=u;
-    console.log(this.messages);
+    
     this.lastMsg3=this.messages.reverse();
     this.lastMsg =this.lastMsg3.filter(m=>(m.auteur.username !== this.authService.loggedUser) );
     console.log(this.lastMsg);
@@ -73,8 +89,15 @@ produits:Produit[];
     }
     return finalArray.concat([current]);
   }, []);
-  console.log(this.lastMsg2);
+
+
+  
   })
+
+  this.initData2();
+  this.count;
+  console.log( this.count);
+  
   }
 
   logout(){
@@ -97,8 +120,7 @@ produits:Produit[];
       window.location.reload();
     });
    }
-  
-   
+
 removeDuplicates(originalArray, prop) {
   var newArray = [];
   var lookupObject  = {};
@@ -128,10 +150,29 @@ removeDuplicates2(originalArray, prop ,prop2) {
    return newArray;
 }
 
-last(){
+
+
+initData2(){
+  
+  this.messageService.dataForm2 = this.formBuilder.group({
+    id:new FormControl(null),
+    vu:new FormControl(true),
+      });
 
 }
+onSubmit(m:Message){
+  const formData = new FormData();
+  const message = this.messageService.dataForm2.value;
+  formData.append('message',JSON.stringify(message));
 
-
-
+  this.messageService.read(formData,m.id).subscribe(data=>{
+      
+    console.log(data);
+    this.messages = [...this.messages, data];
+   
+    
+   }
+  ) 
+  
+}
 }

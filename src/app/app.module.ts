@@ -80,6 +80,7 @@ import { DiscussionsComponent } from './pages/discussions/discussions.component'
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { WriteMessageComponent } from './pages/write-message/write-message.component';
 import { MessagesAllComponent } from './pages/messages/messages-all/messages-all.component';
+import { ProduitsSearchComponent } from './pages/nos-produits/produits-search/produits-search.component';
 
 
 
@@ -157,6 +158,7 @@ import { MessagesAllComponent } from './pages/messages/messages-all/messages-all
     UserPanelComponent,
     WriteMessageComponent,
     MessagesAllComponent,
+    ProduitsSearchComponent,
     
    
    

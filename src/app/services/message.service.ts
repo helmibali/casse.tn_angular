@@ -10,6 +10,7 @@ import { Message } from '../model/message.model';
 })
 export class MessageService {
   public dataForm: FormGroup;
+  public dataForm2: FormGroup;
   constructor(
     private http: HttpClient,
     private authService : AuthService
@@ -20,6 +21,13 @@ export class MessageService {
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.post<Message>('http://localhost:8081/api/message',formData,{headers:httpHeaders});
   }
+  read(formData: FormData,id:number):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    const url = `${'http://localhost:8081/api/message-read'}/${id}`;
+    return this.http.put<any>(url,formData,{headers:httpHeaders});
+  }
   getByAuteur(username:string):Observable<any>{
   const url = `${'http://localhost:8081/api/message-par-auteur'}/${username}`;
   return this.http.get(url);
@@ -29,6 +37,11 @@ getByEmiteur(username:string):Observable<any>{
   return this.http.get(url);
     }
 
+    
+    getByEmiteurUnread(username:string):Observable<any>{
+      const url = `${'http://localhost:8081/api/message-par-emiteur-unread'}/${username}`;
+      return this.http.get(url);
+        }
     getByUser(username:string):Observable<any>{
       const url = `${'http://localhost:8081/api/message-par-user'}/${username}`;
       return this.http.get(url);
@@ -50,4 +63,7 @@ getByEmiteur(username:string):Observable<any>{
               auteur: this.authService.loggedUser,
             },{headers:httpHeaders})
           }
+
+          
+        
 }

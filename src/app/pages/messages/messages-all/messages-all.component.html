@@ -28,7 +28,7 @@
                     data-target="#collapseOne" 
                     aria-expanded="true" 
                     aria-controls="collapseOne">
-                    tous vos messages
+                    tous vos messages ({{toutMessages?.length}})
                   </button>
                 </h2>
               </div>
@@ -44,7 +44,7 @@
                data-target="#collapseTwo" 
                aria-expanded="false"
                 aria-controls="collapseTwo">
-               Messages réçus
+               Messages réçus ({{messagesReceved?.length}})
               </button>
             </h2>
           </div>
@@ -59,7 +59,7 @@
                 data-target="#collapseThree"
                  aria-expanded="false"
                   aria-controls="collapseThree">
-                Messages envoyées
+                Messages envoyées ({{messagesEnvoyee?.length}})
               </button>
             </h2>
           </div>

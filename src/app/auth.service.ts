@@ -21,7 +21,7 @@ public isloggedIn:Boolean=false;
 public roles!:string[];
 token!:string;
 private helper = new JwtHelperService();
-
+public countMsg: number;
 apiURL: string = '/api/login';
 apiURLall: string = '/api/users/liste';
 
@@ -113,7 +113,7 @@ this.decodeJWT();
     return this.helper.isTokenExpired(this.token); }
     
 
-  
+    
 
     
     

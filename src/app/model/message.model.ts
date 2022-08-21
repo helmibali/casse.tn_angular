@@ -5,4 +5,6 @@ export class Message{
     message:string;
     auteur:User;
     emiter:User;
+    dateCreation:Date;
+    vu:boolean;
 }

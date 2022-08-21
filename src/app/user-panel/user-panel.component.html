@@ -37,7 +37,7 @@
                          aria-expanded="false"
                           aria-controls="mesproduits"
                           (click)="scroll()">
-                          <b style="font-size:15px ;color: black;"> Mes produits actives</b>
+                          <b style="font-size:15px ;color: black;"> Mes produits actives {{produits?.length }}</b>
                         </button>
                       
                     </div>
@@ -54,7 +54,7 @@
                             aria-expanded="false"
                              aria-controls="pcmd"
                              (click)="scroll()"
-                             ><b style="font-size:15px ;color: black;">Mes produits commandés</b>
+                             ><b style="font-size:15px ;color: black;">Mes produits commandés {{cartsCmd?.length }}</b>
                             
                           </button>
                         
@@ -74,7 +74,7 @@
                             aria-controls="collapseOne"
                             (click)="scroll()">
                             
-                            <b style="font-size:15px ;color: black;">  Mes commandes</b>
+                            <b style="font-size:15px ;color: black;">  Mes commandes {{carts?.length }}</b>
                           </button>
                         
                       </div>

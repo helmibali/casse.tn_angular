@@ -1,98 +1,31 @@
-<!-- 
 
-<section class="py-5">
-    <div class="px-4 px-lg-5">
-        <pagination-controls class="pagination" style="margin:auto;" (pageChange)="p =$event"></pagination-controls>
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-2" *ngFor="let produit of produits|filter:term ">
-
-                
-
-
-                <div class="card h-100" 
-                style="
-                /* border-radius: 15px; */
-                 /* border: none; */
-                 " >
-                    
-                    <img class="card-img-top" style="border-radius: 15px;"
-                     src="{{'http://localhost:8081/api/imgp/'+produit.idProduit}}" alt="..." />
-                    
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            
-                            <h5 class="fw-bolder">{{  produit.nomProduit }}</h5>
-                            
-                            <span class="badge badge-pill badge-light">
-                                  {{produit.prixProduit}} TND
-                                </span>
-                                <br>
-
-                                <span class="badge badge-pill badge-light">
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>  {{produit.categorie.nomCategorie}}  
-                                </span>
-                        </div>
-                        
-                     
-                        <span class="badge badge-pill badge-light mt-2 text-center" style = "margin: auto;"*ngFor="let m of produit.modeles">
-                            <img href="#"><img class="card-img-top img-responsive"
-                               src = "{{'http://localhost:8081/api/ImgMarque/'+m.marque.id}}" 
-                               style = "height :40px;width:60px;"
-                              alt=""> {{m.libelleModele}} 
-                         </span>  
-                    </div>
-                    <a class="badge badge-primary ml-5" [routerLink]="['/profile',produit.user.user_id]" style="width:30%;">{{produit.user.prenom}} {{produit.user.nom}} </a>
-                    <span class="badge badge-pill badge-light">
-                    <i class="fa fa-phone"> {{produit.user.telephone}}</i>
-                    </span>
-
- 
-                    <span class="badge badge-pill badge-light">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        {{produit.dateCreation | date:'HH:mm'}} à {{produit.dateCreation | date:'dd-MM-yyyy'}}        
-                    </span>
-                    
-
-                        <span class="badge badge-pill badge-light">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                                        {{produit.delegation.gouvernorat.libelle}}, {{produit.delegation.libelle}}
-                          </span>
-                    
-                    <a *ngIf="authService.loggedUser == produit.user.username" class="btn btn-outline-danger" (click)="supprimerProduit(produit)" style="border: none;width:40%;margin:auto;">
-                        <i class="fa fa-trash"></i></a>
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-primary mt-auto" style="border:none;border-radius: 25px;" [routerLink]="['/produit',produit.idProduit]">Plus de détail</a></div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-            </div>
-            
-      
-   
-        
-    
-          
-        </div>
-
-        <div>
-
-        </div>
-        
-            </div> 
-</section> -->
-
+<!-- <div style="display:flex;">
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-secondary" (click)="essence()">Essence</button>  
+    <button type="button" class="btn btn-secondary" (click)="diesel()">Diesel</button>
+    <button type="button" class="btn btn-secondary" (click)="electrique()" >Electrique</button>
+    <button type="button" class="btn btn-secondary" (click)="gpl()">GPL</button>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Année
+      </button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item" href="#">Dropdown link</a>
+        <a class="dropdown-item" href="#">Dropdown link</a>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div style="display: flex" >
+  <p>({{ produits?.length }})</p>
+  <p style="color: rgb(78, 74, 74); font-weight: bold; font-size: large">
+    Annonces sur la casse Tunisie
+  </p>
+</div> -->
 <div  class="container-fluid d-flex justify-content-center">
     <div class="row mb-5">
-      <div *ngFor="let produit of produits|filter:term  " class="col-sm-3">
-        <div class="card mt-3">
+      <div *ngFor="let produit of produits|filter:term  " class="col-sm-3"style="margin: auto;">
+        <div class="card mt-4" >
 
 
           

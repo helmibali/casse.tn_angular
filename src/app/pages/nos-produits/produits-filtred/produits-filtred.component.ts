@@ -12,6 +12,8 @@ import { ProduitService } from 'src/app/produit.service';
 export class ProduitsFiltredComponent implements OnInit {
   @Input()
   term;
+  key:number;
+  tcarburant:string;
   constructor(
    public authService:AuthService,
    public produitService: ProduitService,
@@ -23,6 +25,7 @@ export class ProduitsFiltredComponent implements OnInit {
   produits: Produit[];
 
   ngOnInit(): void {
+    console.log(this.key); 
   }
 
   supprimerProduit(p:Produit){
@@ -36,5 +39,33 @@ export class ProduitsFiltredComponent implements OnInit {
       window.location.reload();
     });
    }
+// essence(){
+//   this.produitService.listeProdduitsByCarburant("Essence").subscribe(p=>{
+//     this.produits=p;
+//   })
+// }
+
+// diesel(){
+//   this.produitService.listeProdduitsByCarburant("Diesel").subscribe(p=>{
+//     this.produits=p;
+//   })
+// }
+
+// gpl(){
+//   this.produitService.listeProdduitsByCarburant("GPL").subscribe(p=>{
+//     this.produits=p;
+//   })
+// }
+
+// electrique(){
+//   this.produitService.listeProdduitsByCarburant("Electrique").subscribe(p=>{
+//     this.produits=p;
+//   })
+// }
+
+onSelectByDelegation(e) {
+  this.key = e.target.value;
+  
+}
 
 }

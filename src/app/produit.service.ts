@@ -112,6 +112,12 @@ listeProdduitsByGouvernorat(id_gouvernorat:number):Observable <Produit[]>{
   return this.http.get<Produit[]>(url);
 }
 
+listeProdduitsByCarburant(carburant:string):Observable <Produit[]>{
+  const url = `${'http://localhost:8081/api/produit-par-carburant'}/${carburant}`;
+  return this.http.get<Produit[]>(url);
+}
+
+
 
 listeProdduitsByGouvernoratAndMarque(id_gouvernorat:number,id_marque:number):Observable <Produit[]>{
   const url = `${'http://localhost:8081/api/produit/gouvernoratAndMarque'}/${id_gouvernorat}/${id_marque}`;
@@ -142,6 +148,11 @@ listeProdduitsByGouvernoratAndDelegationAndMarque(id_gouvernorat:number,id_marqu
 
 listeProdduitsByGouvernoratAndDelegationAndMarqueAndCategorie(id_gouvernorat:number,id_marque:number,id_delegation:number,id_cat:number):Observable <Produit[]>{
   const url = `${'http://localhost:8081/api/produit/gouvernoratAndMarqueAndDelegationAndCategorie'}/${id_gouvernorat}/${id_marque}/${id_delegation}/${id_cat}`;
+  return this.http.get<Produit[]>(url);
+}
+
+listeFilter(id_famille:number,id_cat:number,id_marque:number,id_modele:number,id_gouvernorat:number,id_delegation:number,):Observable <Produit[]>{
+  const url = `${'http://localhost:8081/api/produit-search'}/${id_famille}/${id_cat}/${id_marque}/${id_modele}/${id_gouvernorat}/${id_delegation}`;
   return this.http.get<Produit[]>(url);
 }
 

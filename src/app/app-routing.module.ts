@@ -36,6 +36,7 @@ import { ListModeleComponent } from './pages/modele/list-modele/list-modele.comp
 import { FilterComponent } from './pages/nos-produits/filter/filter.component';
 import { NosProduitsComponent } from './pages/nos-produits/nos-produits.component';
 import { ProduitByIdComponent } from './pages/nos-produits/produit-by-id/produit-by-id.component';
+import { ProduitsSearchComponent } from './pages/nos-produits/produits-search/produits-search.component';
 import { PieceComponent } from './pages/piece/piece.component';
 import { AjouterProduitFrontComponent } from './pages/produits/ajouter-produit-front/ajouter-produit-front.component';
 import { ProduitsComponent } from './pages/produits/produits.component';
@@ -98,6 +99,7 @@ const routes: Routes = [
   {path:"cart",component:CartCompleteComponent},
   {path:"updateProduit/:id", component: UpdateProduitComponent,canActivate:[ProduitGuard]},
   {path:"discussion/:emiter/:auteur" ,component:DiscussionComponent},
+  {path:"nos-produits-filtree/:famille/:categorie/:marque/:modele/:gouvernorat/:delegation" ,component:ProduitsSearchComponent},
   {path:"discussions" ,component:DiscussionsComponent},
   {path:"mon-compte/:user_id" ,component:UserPanelComponent},
   {path: "add-familles",component:AddFamilleComponent}

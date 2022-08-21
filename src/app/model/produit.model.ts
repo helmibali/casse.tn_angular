@@ -6,15 +6,16 @@ import { Moteur } from "./moteur.model";
 import { User } from "./user.model";
 
 export class Produit {
+    
     idProduit : number;
     nomProduit : string;
     prixProduit : number;
     dateCreation : Date ;
-     modeles : Modele[];
-
-     categorie :Categorie;
-     delegation : Delegation;
-     carburant:string;
+    modeles : Modele[];
+    categorie :Categorie;
+    delegation : Delegation;
+    carburant:string;
     description:string;
-     user:User;
+    user:User;
+    annee:number;
 }

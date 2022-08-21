@@ -62,7 +62,7 @@
         <li>
           <a
            class="nav-link"
-           style="font-weight:bold;"  routerLink="/nos-produits">
+           style="font-weight:bold;"  routerLink="/nos-produits-filtree/0/0/0/0/0/0">
            <i class="fa fa-search" aria-hidden="true"></i>  Rechercher une piéce
           </a>
         </li>
@@ -105,7 +105,7 @@
                 Publier votre annonce!
             </button> -->
         </div>
-        <div *ngIf="authService.isloggedIn">
+        <div *ngIf="authService.isloggedIn && messagesRecevedUnread?.length === 0">
           <button 
           
           type="button"
@@ -114,38 +114,81 @@
             data-toggle="dropdown"
             id="dropdownMenuButton2"
              aria-haspopup="true"
-              aria-expanded="false">
+              aria-expanded="false"
+              routerLink="/discussions"
+              >
             <i class="fa fa-envelope" aria-hidden="true"></i>
           </button>
+        </div>
+        
+        <div *ngIf="authService.isloggedIn && messagesRecevedUnread?.length > 0">
+          <button 
+          
+          type="button"
+           class="btn btn-outline-danger dropdown-toggle"
+           style="border:none;"
+            data-toggle="dropdown"
+            id="dropdownMenuButton2"
+             aria-haspopup="true"
+              aria-expanded="false"
+              >
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span
+            *ngIf="messagesRecevedUnread?.length > 0"
+            class="badge" style="position: absolute;    top: 5px;
+            right: 19%;">
+            {{messagesRecevedUnread?.length}}
+            </span>
+          </button>
           <div class="dropdown-menu" style="width:20%;border-radius:10px;left:71%;top:78%;background-color:#f9f9f9df;" >
-           <div *ngFor="let m of lastMsg2 " style="display:flex;align-items: center;align-items: center;" >
+           <div *ngFor="let m of messagesRecevedUnread " style="display:flex;align-items: center;align-items: center;" >
             <div style="list-style-type: none;padding:0;margin:0; width:100%;left:0%" class="mb-1 ml-1">
-              <div style="display:flex;">
-                <div>
-                  <div *ngIf="m.auteur.filename === null">
-                    <a (click)="toDiscussion(m.auteur.username)">
-                    <img class="card-img-top img-responsive rounded-circle image-user"
-                    src =  "../../../assets/images/user.png" 
-                    style = "height :50px;width:50px"
-                   alt="">
-                    </a>
-                  </div>
-                  <div  *ngIf="m.auteur.filename !== null">
-                    <a  (click)="toDiscussion(m.auteur.username)">
-                    <img class="card-img-top img-responsive rounded-circle image-user"
-                    src = "{{'http://localhost:8081/api/ImgUser/'+m.auteur.user_id}}" 
-                    style = "height :50px;width:50px"
-                   alt="">
-                  </a>
-                  </div>
-                 
-                </div>
-                <div class="ml-2" *ngIf="this.authService.loggedUser!==m.auteur.username" >
-                 <b>{{m.auteur.prenom}} {{m.auteur.nom}}</b> <br/>
-                 <p>{{m.message}}</p>
+              
+
+              <form [formGroup]="this.messageService.dataForm2" (ngSubmit)="onSubmit(m)">
+                <input type="hidden"  formControlName="id" id="id" [(ngModel)]="m.id">
+      
+       
+               
+                <div class="form-group">
+                  
+                  <input type="text" class="form-control" formControlName="vu" id="" hidden>
                 </div>
                 
-               </div>
+                
+                
+
+              <button type="submit" style="border:none ;width: 97%;">
+                <div style="display:flex;background-color:#f9f9f985;">
+                  <div>
+                    <div *ngIf="m.auteur.filename === null">
+                      <a (click)="toDiscussion(m.auteur.username)">
+                      <img class="card-img-top img-responsive rounded-circle image-user"
+                      src =  "../../../assets/images/user.png" 
+                      style = "height :50px;width:50px"
+                     alt="">
+                      </a>
+                    </div>
+                    <div  *ngIf="m.auteur.filename !== null">
+                      <a  (click)="toDiscussion(m.auteur.username)">
+                      <img class="card-img-top img-responsive rounded-circle image-user"
+                      src = "{{'http://localhost:8081/api/ImgUser/'+m.auteur.user_id}}" 
+                      style = "height :50px;width:50px"
+                     alt="">
+                    </a>
+                  
+                    </div>
+                   
+                  </div>
+                  <div class="ml-2" *ngIf="this.authService.loggedUser!==m.auteur.username" >
+                   <b>{{m.auteur.prenom}} {{m.auteur.nom}}</b> <br/>
+                   <p>{{m.message}}</p>
+                   <a (click)="toDiscussion(m.auteur.username)"><small><b>répondre</b></small></a>
+                  </div>
+                  
+                 </div>
+              </button>
+            </form>
               </div>
             </div>
          <a routerLink="/discussions">voir tout</a> 
@@ -168,7 +211,7 @@
   aria-hidden="true"
    style="font-size:25px"></i>
   
-  <span class="badge" style="position: absolute;    top: 5px;
+  <span *ngIf="carts?.length > 0" class="badge" style="position: absolute;    top: 5px;
   right: 15%;">{{carts?.length}}</span>
    </button>
 </div>

@@ -77,18 +77,21 @@ export class NosProduitsComponent implements OnInit {
   FamillesList(){
     this.familleService.listeFamille().subscribe(f=>{
       this.familles = f;
+      
     })
   }
 
   GouvernoratsList() {
     this.govService.listeGouvernorats().subscribe((g) => {
       this.gouvernorats = g;
+      
     });
   }
 
   DelegationsList() {
     this.delegationService.ListeDelegation().subscribe((d) => {
       this.delegations = d;
+    
     });
   }
 
@@ -106,6 +109,7 @@ export class NosProduitsComponent implements OnInit {
   marquesList() {
     this.marqueService.getAllMarques().subscribe((m) => {
       this.marques = m;
+      
     });
   }
 
@@ -292,6 +296,13 @@ export class NosProduitsComponent implements OnInit {
       })
   
     }
+  }
+
+  filter2(){
+    this.router
+    .navigate(['/nos-produits-filtree',this.selectedFamille.id,this.selectedCategorie.id,this.selectedMarque.id,this.selectedModele.id,this.selectedGouvernorat.id,this.selectedDelegation.id]).then(()=> {
+      window.location.reload();
+    });
   }
   
  

@@ -19,6 +19,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class WriteMessageComponent implements OnInit {
   term;
+  badge:string;
+  badgeStatus:boolean;
   isLoading:boolean = false;
   errTXT:string='';
   user:User;
@@ -66,6 +68,7 @@ this.messages = m;
       emiter:new FormControl(this.user.user_id),
       message:new FormControl(""),
       dateCreation:new FormControl(new Date()),
+      vu:new FormControl(false),
         });
 
 }
@@ -78,10 +81,13 @@ onSubmit(){
     console.log(data);  
     this.toastr.success('Message envoyé!');
     this.messages = [...this.messages, data];
+   
+    
    }
   ) 
   .catch(()=>this.errTXT="msg d'erreur").finally(()=>{
     
   });
 }
+
 }

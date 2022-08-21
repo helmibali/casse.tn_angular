@@ -78,7 +78,7 @@ export class AjouterProduitFrontComponent implements OnInit {
       carburant: '',
       description:'',
       categorie_id:null,
-     
+      annee:0,
       delegation_id:null,
       
      
